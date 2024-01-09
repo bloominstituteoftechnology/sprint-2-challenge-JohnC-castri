@@ -6,28 +6,104 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
-
+      if (!profile.active) {
+        return { active: true };
+      } else {
+    if (typeof reason === 'string') {
+        return { active: false, reason };
+    } else {
+        return "confirm status manually";
     }
+  }
+}
+
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
+      if (x < 1 || x > 3 || y < 1 || y > 3) {
+    return "invalid coordinates";
+  }
+  let touching = grid[y - 1][x - 1];
+  if (touching === "🟥") {
+    return "🟥 💀"; 
+  } else if (touching === "🟦") {
+    return "🟦 🥳"; 
+  }
+}
 
-    }
 
     // 👉 CHALLENGE 3
-    function booleanize(obj) {
+    function booleanize(bool) {
+  const result = {};
 
+  for (const prop in bool) {
+    if (prop.length > 9) {
+      return "shorten all prop names to 9 chars or less";
     }
+    const value = bool[prop];
+
+    if (value === 0) {
+      result[prop] = false;
+    } else if (value === 1) {
+      result[prop] = true;
+    } else if (value !== null) {
+      result[prop] = value;
+    }
+  }
+
+  return result;
+}
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
+  // Check if text is empty or there are no forbidden words
+  if (!text || forbidden.length === 0) {
+    return text;
+  }
 
+  // Split the text into words
+  const words = text.split(' ');
+
+  // Replace forbidden words with 'x' characters
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i].toLowerCase();
+
+    // Check if the current word is in the forbidden array
+    for (let j = 0; j < forbidden.length; j++) {
+      const forbiddenWord = forbidden[j].toLowerCase();
+
+      if (word === forbiddenWord) {
+        // Replace each letter with 'x'
+        let replacedWord = '';
+        for (let k = 0; k < word.length; k++) {
+          replacedWord += 'x';
+        }
+
+        words[i] = replacedWord;
+        break;
+      }
     }
-
+  }
+  const scrubbedText = words.join(' ');
+  return scrubbedText;
+}
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
+  if (typeof num === 'string' && num.length === 10) {
+    let template = "(XXX) XXX-XXXX";
 
+    for (let index = template.length - 1, numb = num.length - 1; index >= 0; index--) {
+      if (template[index] === 'X') {
+        template = template.slice(0, index) + num[numb] + template.slice(index + 1);
+        numb--;
+      }
     }
+
+    return template;
+  } else {
+    return "Invalid input. Please provide a 10-digit phone number.";
+  }
+}
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
