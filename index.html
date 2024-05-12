@@ -23,6 +23,18 @@
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
+      if (x > 3 || x < 1 || y > 3 || y < 1) {
+        return 'invalid coordinates'
+      }
+      y--
+      x--
+      let arrarcords = grid[y][x]
+      if (arrarcords === '🟥') {
+        return `🟥 💀`
+      }
+      else if (arrarcords === "🟦") {
+    return "🟦 🥳";
+  }
 
     }
 
