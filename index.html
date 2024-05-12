@@ -6,6 +6,18 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
+      if (profile.active === true && typeof reason === "string") {
+        let propert = {active: false, reason: reason}
+        return propert
+      }
+      else if (profile.active === true  && reason === undefined) {
+        let property = 'confirm status manually'
+        return property
+      }
+      else {
+        let propertyy = {active: true}
+        return propertyy
+      }
 
     }
 
